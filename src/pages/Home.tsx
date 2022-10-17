@@ -51,24 +51,18 @@ export const Home = () => {
               height: 400,
               menubar: false,
               plugins:
-                "print preview paste importcss searchreplace autolink directionality code" +
-                "visualblocks visualchars image editimage link media template table charmap hr pagebreak" +
-                "nonbreaking toc insertdatetime advlist lists wordcount imagetools" +
-                "textpattern noneditable charmap quickbars",
+                "preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons",
 
-              toolbar:
+              toolbar: [
                 "|bold italic underline forecolor backcolor removeformat| fontselect fontsizeselect formatselect |" +
-                " alignleft aligncenter alignjustify numlist bullist|" +
-                " charmap print insertfile image table | blocks",
-              editimage_proxy_service_url:
-                "http://mydomain.com/ephox-image-proxy/",
-              editimage_toolbar:
-                "rotateleft rotateright | flipv fliph | editimage imageoptions",
+                  " alignleft aligncenter alignjustify numlist bullist|" +
+                  " charmap print insertfile image table | blocks",
+              ],
               quickbars_selection_toolbar:
                 "bold italic | quicklink h2 h3 blockquote quickimage quicktable",
               imagetools_cors_hosts: ["picsum.photos"],
-              toolbar_mode: "sliding",
               image_caption: true,
+              toolbar_mode: "sliding",
               quickbars_insert_toolbar: false,
             }}
           />
