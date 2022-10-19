@@ -1,12 +1,13 @@
 import React from "react";
-import { Home } from "./pages/Home";
+import Router from "./routes/Routes";
+import "./global.css";
+import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <div>
-     
-      <Home></Home>
-    </div>
+    <AuthContextProvider>
+      <Router />
+    </AuthContextProvider>
   );
 }
 
