@@ -16,6 +16,7 @@ export type User = {
 type AuthContextType = {
   googleAuth: () => void;
   logout: () => void;
+  getCurrentUser: () => any
   currentUser?: User;
 };
 
@@ -58,9 +59,19 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const getCurrentUser = async () => {
+    try {
+      return await AuthFirebase.getCurrentUser()
+    } catch (error: any) {
+      throw new alert('There was a problem rescuing the user')
+    }
+  }
+
+
   const ProviderValues = {
     googleAuth,
     logout,
+    getCurrentUser,
     currentUser,
     invalidPassword,
     invalidEmail,

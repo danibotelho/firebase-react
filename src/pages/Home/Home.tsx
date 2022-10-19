@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { firestore } from "../../firebase/config/firebase";
 import { addDoc, collection } from "firebase/firestore";
+import { useAuth } from "../../hooks/useAuth";
 import { Editor } from "@tinymce/tinymce-react";
-import {
-  Box,
-  Button,
-} from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 export const Home = () => {
   const ref = collection(firestore, "messages");
   const [body, setBody] = useState("");
+  const { logout, getCurrentUser } = useAuth();
+  const [userInitials, setUserInitials] = useState<string>();
+
+  useEffect(() => {
+    getCurrentUser().then((res: any) => {
+      setUserInitials(res.displayName);
+    });
+  }, []);
 
   const handleSaveEditor = (e: any) => {
     e.preventDefault();
@@ -25,9 +31,24 @@ export const Home = () => {
     }
   };
 
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <Box>
-      <Box>
+      <Box sx={{ margin: "15px", display: "flex" }}>
+        <Typography variant="h4"> {userInitials} </Typography>
+        <Button
+          type="submit"
+          variant="outlined"
+          onClick={() => handleLogout()}
+          sx={{ marginLeft: "15px" }}
+        >
+          Sign Out
+        </Button>
+      </Box>
+      <Box sx={{ margin: "15px", padding: "8px" }}>
         <Editor
           textareaName="content"
           initialValue=""
@@ -53,14 +74,15 @@ export const Home = () => {
             quickbars_insert_toolbar: false,
           }}
         />
+        <Button
+          type="submit"
+          variant="contained"
+          onClick={handleSaveEditor}
+          sx={{ margin: "8px" }}
+        >
+          Save
+        </Button>
       </Box>
-      <Button
-        type="submit"
-        variant="contained"
-        onClick={handleSaveEditor}
-      >
-        Save
-      </Button>
     </Box>
   );
 };
