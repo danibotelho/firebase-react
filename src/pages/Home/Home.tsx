@@ -56,7 +56,7 @@ export const Home = () => {
             setBody(newText);
           }}
           init={{
-            height: 400,
+            height: 300,
             menubar: false,
             plugins:
               "preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons",
@@ -82,6 +82,17 @@ export const Home = () => {
         >
           Save
         </Button>
+      </Box>
+      <Box
+        sx={{
+          margin: "15px",
+          padding: "20px",
+          height: "300px",
+          border: `dashed 3px #5C73DB`,
+          borderRadius: "25px",
+        }}
+      >
+        <Typography dangerouslySetInnerHTML={{ __html: body }} />
       </Box>
     </Box>
   );
