@@ -4,12 +4,14 @@ import { addDoc, collection } from "firebase/firestore";
 import { useAuth } from "../../hooks/useAuth";
 import { Editor } from "@tinymce/tinymce-react";
 import { Box, Button, Typography } from "@mui/material";
+import { useNavigate } from 'react-router-dom'
 
 export const Home = () => {
   const ref = collection(firestore, "messages");
   const [body, setBody] = useState("");
   const { logout, getCurrentUser } = useAuth();
   const [userInitials, setUserInitials] = useState<string>();
+  const navigate = useNavigate()
 
   useEffect(() => {
     getCurrentUser().then((res: any) => {
@@ -41,11 +43,19 @@ export const Home = () => {
         <Typography variant="h4"> {userInitials} </Typography>
         <Button
           type="submit"
-          variant="outlined"
+          variant="contained"
           onClick={() => handleLogout()}
           sx={{ marginLeft: "15px" }}
         >
           Sign Out
+        </Button>
+        <Button
+          type="submit"
+          variant="outlined"
+          onClick={() => navigate('/img')}
+          sx={{ marginLeft: "15px" }}
+        >
+          To Upload IMG 
         </Button>
       </Box>
       <Box sx={{ margin: "15px", padding: "8px" }}>
